@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block title %}
+Создание заметки
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Создание заметки</h1>
+
+    <form action="{% url 'create-note' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+                <div class="mb-3">
+         <label for="noteImage" class="form-label">Картинка</label>
+				<input name="noteImage" type="file" class="form-control" id="imageInput">
+        </div>
+        
+        <div class="container_image">
+					{% if note.image %}
+						<img class="previewImage" src="{{ note.image.url }}" alt="img" id="previewImage">
+						{% else %}
+						<img class="previewImage" src="{% static 'images/default/nophoto.png' %}" alt="img" id="previewImage">
+					{% endif %}
+				</div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Укажите теги через запятую</label>
+          <input name="tags" type="text" class="form-control" id="exampleFormControlInput1">
+        </div>
+
+
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">Заголовок</label>
+          <input name="title" type="text" class="form-control" id="exampleFormControlInput1" value="{{ note.title }}">
+        </div>
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Содержимое</label>
+          <textarea name="content" class="form-control" id="exampleFormControlTextarea1" rows="10">{{ note.content }}</textarea>
+        </div>
+
+        <!-- Блок кнопки -->
+        <button type="submit" class="btn btn-outline-primary">Отправить</button>
+
+    </form>
+</div>
+{% endblock %}

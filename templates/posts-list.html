@@ -1,0 +1,28 @@
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    {% for note in notes %}
+    <div class="row row-cols-1 row-cols-sm-2 g-3">
+       <div class="col">
+          <div class="card">
+            <div class="card-body">              
+               <a class="card-title" href="{% url 'show-note' note.uuid %}">{{ note.title }}</a>
+               <p class="card-text">{{ note.content }}</p>
+               <p class="card-text">{{ note.created_at }}</p>
+             <a href="{% url 'user-notes' note.username %}">
+                  {{ note.username }}
+              </a>
+              <div>
+                {# Если у заметки нет тегов, то все равно будет список, в котором имеется лишь один None, не учитываем такое #}
+                {% if note.tag_names.0 != None %}
+                  {% for tag in note.tag_names %}
+                      <span class="me-2 badge text-bg-primary">{{ tag }}</span>
+                  {% endfor %}
+                {% endif %}
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+
+</div>

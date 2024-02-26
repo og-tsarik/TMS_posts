@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "django23"
+version = "0.1.0"
+description = ""
+authors = ["og-tsarik <tsarikolya@gmail.com >"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^5.0.1"
+psycopg2 = "^2.9.9"
+pillow = "^10.2.0"
+django-ckeditor = "^6.7.0"
+djangorestframework = "^3.14.0"
+
+
+[tool.poetry.group.dev.dependencies]
+faker = "^22.6.0"
+django-debug-toolbar = "^4.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

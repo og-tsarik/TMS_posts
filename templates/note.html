@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	{{ note.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="text-center">
+            <h2 class="display-5 link-body-emphasis mb-1">{{ note.title | upper }}</h2>
+            <p class="blog-post-meta">{{ note.created_at }}</p>
+        </div>
+
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+
+            <a href="{% url 'edit-note' note.uuid %}" class="btn btn-warning">Редактировать</a>
+
+            <form action="{% url 'delete-note' note.uuid %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Удалить</button>
+            </form>
+        </div>
+
+        <hr>
+        
+         {#  Image  #}
+        {% if note.image %}
+            <div class="d-flex justify-content-center">
+                <img style="max-height: 150px;" src="{{ note.image.url }}" alt="img">
+            </div>
+        {% endif %}
+
+        <div>{{ note.content | safe | linebreaks }}</div>
+
+    </div>
+{% endblock %}
